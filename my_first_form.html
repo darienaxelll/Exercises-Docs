@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>My first HTML form</title>
+	</head>
+	<body>
+		<h1>HTML Form Exercises</h1>
+
+		<div>
+		<h2>Login form</h2>
+		<form method="POST" action="http://request-inspector.glitch.me/">
+			<label for="username">Username</label>
+			<input id="username" placeholder="Type usernsme here" type="text">
+
+			<label for="password">Password</label>
+			<input id="password" placeholder="Type password here" type="password">
+			<br>
+			<button type="submit:">Login</button>
+		</form>
+		</div>
+
+		<div>
+		<h2>Compose an email</h2>
+		<form method="POST" action="http://request-inspector.glitch.me/">
+				<label for="to">To</label>
+				<input id="to" type="text">
+
+				<label for="from">From</label>
+				<input id="from" type="text">
+
+				<label for="subject">Subject</label>
+				<input id="subject" type="text">
+
+				<label for="body">Body</label>
+				<textarea id="email_body" name="email_body" placeholder="Content here"></textarea>
+
+				<input type="checkbox" id="save_email" name="save_email" value="yes">
+				<label for="save_email">Save email to "send" folder?</label>
+				<br>
+				<button type="submit:">Send</button>
+		</form>
+		</div>
+
+		<div>
+		<h2>Muliple Chopice Test</h2>
+		<form method="POST" action="http://request-inspector.glitch.me/">
+			<p>What color is your hair?</p>
+			<label>
+			<input type="radio" name="q1" value="Red">
+			Red
+			</label>
+			<label>
+			<input type="radio" name="q1" value="Black">
+			Black
+			</label>
+			<label>
+			<input type="radio" name="q1" value="Blond">
+			Blond
+			</label>
+			<label>
+			<input type="radio" name="q1" value="Brown">
+			Brown
+			</label>
+			<br>
+			<p>What color are your eyes?</p>
+			<label>
+			<input type="radio" name="q2" value="Red">
+			Red
+			</label>
+			<label>
+			<input type="radio" name="q2" value="Green">
+			Green
+			</label>
+			<label>
+			<input type="radio" name="q2" value="Blue">
+			Blue
+			</label>
+			<label>
+			<input type="radio" name="q2" value="Brown">
+			Brown
+			</label>
+			<br>
+			<label for="movies">What types of movies do you enjoy?</label>
+			<select id="movies" name="movies[]" multiple>
+				<option value="Scary">Scary</option>
+				<option value="Action">Action</option>
+				<option value="Drama">Drama</option>
+				<option value="RomCom">RomCom</option>
+			</select>
+			<br>
+			<button type="submit:">Press here to submit</button>					
+		</form>
+		</div>
+
+		<div>
+		<h2>Select Testing</h2>
+		<form method="POST" action="http://request-inspector.glitch.me/">
+			<p>Are you a human?</p>
+			<label>
+			<input type="radio" name="q1" value="1">
+			Yes
+			</label>
+			<label>
+			<input type="radio" name="q1" value="0">
+			No
+			</label>
+			<br>
+			<button type="submit:">Press here to submit</button>
+		</form>
+		</div>
+	</body>
+</html>

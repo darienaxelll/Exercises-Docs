@@ -1,0 +1,49 @@
+header {
+    text-align: center;
+}
+
+.fancy-header{
+    text-decoration: underline;
+    color: darkred;
+}
+
+body{
+    background-color: transparent;
+    background-image: url(../img/background-1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+ul, ol{
+    list-style-type: circle;
+}
+
+img{
+    float: initial;
+}
+
+html{
+    font-style: oblique;
+}
+
+#ourProduct {
+    padding-left: 32em;
+}
+
+table{
+    padding-left: 15em;
+    font-size: 2em;
+}
+
+a:link {
+    color: red;
+}
+a:hover {
+    color: palevioletred;
+}
+a:visited {
+    color: cadetblue;
+}
+a:active {
+    color: green;
+}
