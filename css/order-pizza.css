@@ -37,3 +37,7 @@
 .btn-group {
     float: right;
 }
+
+.badge {
+    margin-right: 5px;
+}
