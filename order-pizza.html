@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="css/order-pizza.css">
 		<!-- Your custom css styles go here -->
 	</head>
-	<body>
+	<body id = "start">
 	<!-- Main page content -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
@@ -48,65 +48,222 @@
 			<h2>Build your own pizza!</h2>
 		</div>
 
-		<div class="card text-center">
-			<div class="card-header">
-				<ul class="nav nav-tabs card-header-tabs">
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="true" href="#"><span class="badge rounded-pill bg-secondary">1</span>Size and Crust</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#"><span class="badge rounded-pill bg-secondary">2</span>Cheese and Sauce</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#"><span class="badge rounded-pill bg-secondary">3</span>Toppings</a>
-					</li>
-				</ul>
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true"><span class="badge rounded-pill bg-secondary">1</span>Size and Crust</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><span class="badge rounded-pill bg-secondary">2</span>Cheese and Sauce</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><span class="badge rounded-pill bg-secondary">3</span>Toppings</button>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<div class="card text-center">
+							<div class="card-header">
+								<ul class="nav nav-tabs card-header-tabs">
+									<li class="nav-item">
+										<a class="nav-link active" aria-current="true" href="#"><span class="badge rounded-pill bg-secondary">1</span>Size and Crust</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#"><span class="badge rounded-pill bg-secondary">2</span>Cheese and Sauce</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#"><span class="badge rounded-pill bg-secondary">3</span>Toppings</a>
+									</li>
+								</ul>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+										<ul class="list-group">
+											<li class="list-group-item active" id = "title" aria-current="true">Choose your Size and Crust</li>
+										</ul>
+
+									<div class="card">
+										<div class="card-header">
+											Hand Tossed
+										</div>
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item">Garlic seasoned crust with rich, buttery taste</li>
+											<li class="list-group-item">
+													<input class="form-check-input" type="radio" name="flexRadioDefault" id="pizza-size">
+													<label class="form-check-label" for="pizza-size">Small (10")</label>
+											</li>
+											<li class="list-group-item">
+												<input class="form-check-input" type="radio" name="flexRadioDefault" id="pizza-size">
+												<label class="form-check-label" for="pizza-size">Medium (12")</label>
+											</li>
+										</ul>
+									</div>
+
+									<div class="card" >
+										<div class="card-header">
+											Crispy Thin
+										</div>
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item">Thin enough for optimum crispy to crunch ratio</li>
+											<li class="list-group-item">
+												<input class="form-check-input" type="radio" name="flexRadioDefault" id="pizza-size">
+												<label class="form-check-label" for="pizza-size">Medium (12")</label>
+											</li>
+											<li class="list-group-item">
+												<input class="form-check-input" type="radio" name="flexRadioDefault" id="pizza-size">
+												<label class="form-check-label" for="pizza-size">Large (17")</label>
+											</li>
+										</ul>
+									</div>
+								</p>
+
+								<a href="" class="btn btn-primary" >Next Step ></a>
+							</div>
+						</div>
 			</div>
-			<div class="card-body">
-				<p class="card-text">
-					<ul class="list-group">
-						<li class="list-group-item active" id = "title" aria-current="true">Choose your Size and Crust</li>
-					</ul>
-
-				<div class="card">
+			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+				<div class="card text-center">
 					<div class="card-header">
-						Hand Tossed
+						<ul class="nav nav-tabs card-header-tabs">
+							<li class="nav-item">
+								<a class="nav-link" aria-current="true" href="#"><span class="badge rounded-pill bg-secondary">1</span>Size and Crust</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="#"><span class="badge rounded-pill bg-secondary">2</span>Cheese and Sauce</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#"><span class="badge rounded-pill bg-secondary">3</span>Toppings</a>
+							</li>
+						</ul>
 					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Garlic seasoned crust with rich, buttery taste</li>
-						<li class="list-group-item">
-								<input class="form-check-input" type="radio" name="flexRadioDefault" id="pizza-size">
-								<label class="form-check-label" for="pizza-size">Small (10")</label>
-						</li>
-						<li class="list-group-item">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" id="pizza-size">
-							<label class="form-check-label" for="pizza-size">Medium (12")</label>
-						</li>
-					</ul>
-				</div>
+					<div class="card-body">
+						<p class="card-text">
+						<ul class="list-group">
+							<li class="list-group-item active" id = "title" aria-current="true">Choose Cheese and Sauce</li>
+						</ul>
 
-				<div class="card" >
+						<div class="card">
+							<div class="card-header">
+								Cheese
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">How Much?</li>
+								<li class="list-group-item">
+									<select class="form-select" aria-label="Default select example">
+										<option value="1">Light</option>
+										<option value="2" selected>Normal</option>
+										<option value="3">Extra</option>
+									</select>
+								</li>
+							</ul>
+						</div>
+
+						<div class="card" >
+							<div class="card-header">
+								Sauce
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">What Type?</li>
+								<li class="list-group-item">
+									<select class="form-select" aria-label="Default select example">
+										<option value="1">Tomato</option>
+										<option value="2">Marinara</option>
+										<option value="3">BBQ</option>
+									</select>
+								</li>
+								<li class="list-group-item">How Much?</li>
+								<li class="list-group-item">
+									<select class="form-select" aria-label="Default select example">
+										<option value="1">Light</option>
+										<option value="2" selected>Normal</option>
+										<option value="3">Extra</option>
+									</select>
+								</li>
+							</ul>
+						</div>
+
+						</p>
+
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<a href=""><button type="button" class="btn btn-primary">< Previous</button></a>
+							<a href=""><button type="button" class="btn btn-primary">Next ></button></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+				<div class="card text-center">
 					<div class="card-header">
-						Crispy Thin
+						<ul class="nav nav-tabs card-header-tabs">
+							<li class="nav-item">
+								<a class="nav-link" aria-current="true" href="#"><span class="badge rounded-pill bg-secondary">1</span>Size and Crust</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#"><span class="badge rounded-pill bg-secondary">2</span>Cheese and Sauce</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="#"><span class="badge rounded-pill bg-secondary">3</span>Toppings</a>
+							</li>
+						</ul>
 					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Thin enough for optimum crispy to crunch ratio</li>
-						<li class="list-group-item">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" id="pizza-size">
-							<label class="form-check-label" for="pizza-size">Medium (12")</label>
-						</li>
-						<li class="list-group-item">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" id="pizza-size">
-							<label class="form-check-label" for="pizza-size">Large (17")</label>
+					<div class="card-body">
+						<p class="card-text">
+						<ul class="list-group">
+							<li class="list-group-item active" id = "title" aria-current="true">Choose Toppings</li>
+						</ul>
 
-											<!--Gotta work on radio structure-->
-						</li>
-					</ul>
+						<div class="card">
+							<div class="card-header">
+								Choose Meats
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+									<label class="form-check-label" for="defaultCheck1">Beef</label>
+								</li>
+								<li class="list-group-item">
+									<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+									<label class="form-check-label" for="defaultCheck1">Ham</label>
+								</li>
+								<li class="list-group-item">
+									<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+									<label class="form-check-label" for="defaultCheck1">Philly Steak</label>
+								</li>
+								<li class="list-group-item">
+									<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+									<label class="form-check-label" for="defaultCheck1">Bacon</label>
+								</li>
+							</ul>
+						</div>
+
+						<div class="card" >
+							<div class="card-header">
+								Choose Non-Meats
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+									<label class="form-check-label" for="defaultCheck1">Green Peppers</label>
+								</li>
+								<li class="list-group-item">
+									<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+									<label class="form-check-label" for="defaultCheck1">Mushrooms</label>
+								</li>
+								<li class="list-group-item">
+									<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+									<label class="form-check-label" for="defaultCheck1">Onions</label>
+								</li>
+								<li class="list-group-item">
+									<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+									<label class="form-check-label" for="defaultCheck1">Jalapeño Peppers</label>
+								</li>
+							</ul>
+						</div>
+
+						</p>
+
+						<a href="#" class="btn btn-primary">Checkout<i class="fas fa-shopping-cart"></i></a>
+					</div>
 				</div>
-
-				</p>
-
-				<a href="#" class="btn btn-primary">Next Step ></a>
 			</div>
 		</div>
 	</div>
