@@ -21,7 +21,19 @@
     margin-bottom: 10px;
 }
 
+#title {
+    text-align: left;
+}
+
 .card {
     margin: 20px 0;
     text-align: left;
+}
+
+.btn-primary {
+    float: right;
+}
+
+.btn-group {
+    float: right;
 }
