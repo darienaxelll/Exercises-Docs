@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    background: #848487;
+}
+
+#logo {
+
+}
+
+a {
+    display: inline-block;
+    color: black;
+    padding: 20px 60px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+A:hover {
+    color: blue;
+}
