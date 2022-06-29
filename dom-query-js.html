@@ -25,6 +25,11 @@
 		culpa qui officia deserunt mollit anim id est laborum.
 	</p>
 
+	<button href ="#" id="btn1">Click me!</button>
+	<button href ="#" id="btn2">Click me!</button>
+	<button href ="#" id="btn3">Click me!</button>
+	<button href ="#" id="btn4">Click me!</button>
+
 	<script>
 		(function() {
 			"use strict";
@@ -32,26 +37,72 @@
 			let mainHeader = document.getElementById("main-header");
 
 			// TODO: Set inner html of mainHeader to "JavaScript is Cool"
-			mainHeader.innerHTML = "JavaScript is Cool";
+			// mainHeader.innerHTML = "JavaScript is Cool";
 
 			// TODO: Uncomment the next line and get the sub header element by id
 			let subHeader = document.getElementById("sub-header");
 
 			// TODO: Set the text color of subHeader to blue
-			subHeader.style.color = '#0000FF';
+			// subHeader.style.color = '#0000FF';
 
 			// TODO: Uncomment the next line and get all list items
 			let listItems = document.getElementsByTagName("li");
+
 			// TODO: Set text color on every other list item to grey
-			listItems[1].style.color = '#808080';
-			listItems[3].style.color = '#808080';
+
+			let myElements = document.querySelectorAll("li");
+
+			// myElements.forEach(function (myElement) {
+			// 	if (myElement % 2 === 0) {
+			// 		myElement.style.color = '#808080';
+			// 	}
+			// })
+			// console.log(myElements);
+
+				function everyOther() {
+					for (let i = 0; i < listItems.length; i++) {
+						if (i % 2 === 0) {
+							console.log(listItems[i]);
+							listItems[i].style.color = 'grey';
+						}
+					}
+				}
+
 			// TODO: Set text color of li with dbid = 1 to blue
-			listItems[0].style.color = '#0000FF';
+			// listItems[0].style.color = '#0000FF';
+
 			// TODO: Uncomment the next line and get all elements with class name sub-paragraph
 			let subParagraphs = document.getElementsByClassName("sub-paragraph");
 
 			// TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
-			subParagraphs[0].innerHTML = "Mission Accomplished!";
+			// subParagraphs[0].innerHTML = "Mission Accomplished!";
+
+			let btn1 = document.getElementById('btn1');
+			let btn2 = document.getElementById('btn2');
+			let btn3 = document.getElementById('btn3');
+			let btn4 = document.getElementById('btn4');
+
+			function btn1action() {
+				mainHeader.innerHTML = "JavaScript is Cool";
+			}
+
+			function btn2action () {
+				subHeader.style.color = '#0000FF';
+			}
+
+			function btn3action () {
+				everyOther();
+			}
+
+			function btn4action () {
+				subParagraphs[0].innerHTML = "Mission Accomplished!";
+			}
+
+			btn1.addEventListener('click', btn1action);
+			btn2.addEventListener('click', btn2action);
+			btn3.addEventListener('click', btn3action);
+			btn4.addEventListener('click', btn4action);
+
 		})();
 	</script>
 	</body>
