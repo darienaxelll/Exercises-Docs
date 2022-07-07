@@ -4,6 +4,77 @@
 	<meta charset="UTF-8">
 	<title>DOM: Query and Modify</title>
 </head>
+
+	<style>
+
+		@keyframes items {
+			from {background: bisque}
+			to {background: darkcyan}
+		}
+
+		@keyframes backgroundChange {
+			0% {background-color: #F5F5DC;}
+			20% {background-color: #474838;}
+			40% {background-color: #ACAC9A;}
+			60% {background-color: #B9DEDE;}
+			80% {background-color: #83A7A7;}
+			100% {background-color: #F5F5DC;}
+		}
+
+		body  {
+			background: beige;
+		}
+
+		h1 {
+			border-radius: 5px;
+			border: 1px solid black;
+			text-align: center;
+			animation-name: backgroundChange;
+			animation-iteration-count: infinite;
+			animation-duration: 15s;
+		}
+
+		ul {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		li {
+			border: 1px solid black;
+			border-radius: 10%;
+			list-style: none;
+			background: #7575a8;
+			font-size: large;
+		}
+
+		div {
+			display: flex;
+			justify-content: space-around;
+		}
+
+		button {
+			border-radius: 40px;
+			cursor: pointer;
+		}
+
+		#btn1 {
+			background: #7575a8;
+		}
+
+		#btn2 {
+			background: #0fb784;
+		}
+
+		#btn3 {
+			background: #3B94D9;
+		}
+
+		#btn4 {
+			background: #95e795;
+		}
+
+	</style>
+
 	<body>
 
 	<h1 id="main-header">Hello World!</h1>
@@ -25,10 +96,12 @@
 		culpa qui officia deserunt mollit anim id est laborum.
 	</p>
 
-	<button href ="#" id="btn1">Click me!</button>
-	<button href ="#" id="btn2">Click me!</button>
-	<button href ="#" id="btn3">Click me!</button>
-	<button href ="#" id="btn4">Click me!</button>
+	<div>
+		<button href ="#" id="btn1">Option 1</button>
+		<button href ="#" id="btn2">Option 2</button>
+		<button href ="#" id="btn3">Option 3</button>
+		<button href ="#" id="btn4">Option 4</button>
+	</div>
 
 	<script>
 		(function() {

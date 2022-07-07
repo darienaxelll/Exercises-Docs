@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Konami Code</title>
+	</head>
+	<body>
+	<style>
+		@keyframes backgroundChange {
+			0% {background: black;}
+			100% {background: white;}
+		}
+
+		@keyframes title {
+			0% {font-size: 15px}
+			25% {font-size: 22px}
+			50%{font-size: 30px}
+			75% {font-size: 22px}
+			100% {font-size: 15px}
+		}
+
+		#header {
+			padding: 0 50px;
+			background: #95e795;
+		}
+
+		h1 {
+			text-align: center;
+			animation: title infinite 10s;
+		}
+
+		canvas {
+			position: relative;
+			border: 1px solid black;
+			background: bisque;
+		}
+
+	</style>
+	<div id="header">
+		<h1>Konami Code</h1>
+	</div>
+	<canvas id="easterEgg">
+
+	</canvas>
+
+	<script>
+		"use strict";
+
+		let sequence = '';
+		let header = document.getElementsByTagName("h1");
+		let action = document.querySelector("body");
+		let c = document.querySelector("canvas")
+		let ctx = c.getContext("2d");
+
+		c.height = window.innerHeight;
+		c.width = window.innerWidth;
+
+		function aniamte() {
+			requestAnimationFrame(aniamte);
+			// c.clearRect(0, 0, innerWidth , innerHeight);
+
+			let x = Math.floor(Math.random() * window.innerWidth);
+			let y = Math.floor(Math.random() * window.innerHeight);
+			let radius = Math.floor(Math.random() * 40) + 10;
+
+			ctx.beginPath();
+			ctx.arc(x, y, radius, 0, 2 * Math.PI);
+			ctx.stroke();
+
+		}
+
+		for (let i = 0; i < 1; i++) {
+			aniamte();
+		}
+
+		action.addEventListener("keyup", function(event) {
+
+			sequence += event.key;
+			if (sequence === 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightbaEnter') {
+				c.style.animation = 'backgroundChange 1s infinite';
+			}
+		});
+	</script>
+	</body>
+</html>
