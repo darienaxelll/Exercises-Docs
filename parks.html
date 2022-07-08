@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script src="https://kit.fontawesome.com/ea1f9afeed.js" crossorigin="anonymous"></script>
 	<meta charset="UTF-8">
 	<title>Natural Parks</title>
 </head>
@@ -87,36 +86,27 @@
 		border: 3px solid brown;
 	}
 
-	#wyoming{
-		height: 400px;
-		width: 900px;
-		border-radius: 10px;
-		border: 2px solid darkolivegreen;
+	#tree1 {
+		margin-top: 60px;
+		margin-left: 200px;
+		font-size: 150px;
+		color: teal;
 	}
 
-	#deer{
-		height: 300px;
-		width: 400px;
-		border-radius: 10px;
-		border: 2px solid darkolivegreen;
+	#tree2 {
+		font-size: 200px;
+		color: teal;
 	}
 
-	#yellow{
-		height: 300px;
-		width: 400px;
-		border-radius: 10px;
-		border: 2px solid darkolivegreen;
+	#tree3 {
+		font-size: 120px;
+		color: teal;
 	}
 
-	#duo {
-		display: flex;
-		justify-content: space-around;
-	}
-
-	#single {
-		margin-top: 10px;
-		margin-left: 5px;
-		margin-right: 5px;
+	#person {
+		margin-top: 300px;
+		margin-left: 20px;
+		font-size: 60px;
 	}
 </style>
 <body>
@@ -155,17 +145,12 @@
 				<dd>Before you head out, check with the national parks that you intend to visit. In many national parks, off-road driving is illegal. Where off-road driving is allowed, the National Park Service regulates it.</dd>
 			</dl>
 		</div>
-
-		<div id="pictures">
-			<div id="duo">
-				<img id="yellow" src="img/yellowstone.jpg">
-				<img id="deer" src="img/deerNature.jpg">
-			</div>
-			<div id="single">
-				<img id="wyoming" src="img/wyomingPark.jpg">
-			</div>
+		<div>
+			<i id="tree1" class="fa-solid fa-tree"></i>
+			<i id="tree2" class="fa-solid fa-tree"></i>
+			<i id="tree3" class="fa-solid fa-tree"></i>
+			<i id="person" class="fa-solid fa-person-hiking"></i>
 		</div>
-
 	</div>
 
 	<div id="section2">
@@ -205,6 +190,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://kit.fontawesome.com/ea1f9afeed.js" crossorigin="anonymous"></script>
 	<script>
 		let nationalParks = document.getElementById('nationalParkDiv');
 		let btn = document.getElementById('parksEdit');
