@@ -1,83 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script src="https://kit.fontawesome.com/ea1f9afeed.js" crossorigin="anonymous"></script>
 	<meta charset="UTF-8">
-	<title>Parks</title>
+	<title>Natural Parks</title>
 </head>
 <style>
 
+	@keyframes header {
+		0%  {color: #00755E}
+		50%  {color: #658026}
+		100%  {color: #00755E}
+	}
+
+	body {
+		background: #83A7A7;
+	}
+	#section1 {
+		display: flex;
+		background: #95e795;
+		border-radius: 10px;
+	}
+
+	#FAQ {
+		display: flex;
+		flex-direction: column;
+		border-radius: 10px;
+		border: 1px solid black;
+		width: 40%;
+		background: #F5F5DC;
+	}
+
+	#section2 {
+		display: flex;
+		justify-content: space-between;
+		background: #ACAC9A;
+		border-radius: 10px;
+		margin-top: 10px;
+	}
+
+	h1 {
+		text-decoration: underline;
+		margin-left: 10px;
+		animation: header infinite 50s;
+	}
+
+	dl {
+		margin: 0 5px;
+		padding-bottom: 10px;
+	}
+
+	dt {
+		font-weight: bold;
+		margin-top: 10px;
+	}
+
+	h3 {
+		text-decoration: underline;
+		padding: 5px 0;
+	}
+
+	#parkList {
+		padding: 0 10px;
+		border: 1px solid black;
+		border-radius: 10px;
+		width: 50%;
+		background: peru;
+	}
+
+	button {
+		margin-bottom: 2em;
+		padding: .5em;
+		border-radius: 20px;
+		background: #F5F5DC;
+		cursor: pointer;
+		margin-left: 300px;
+		margin-top: 20px;
+	}
+
+	#forest {
+		margin-top: 30px;
+		margin-left: 60px;
+		height: 550px;
+		width: 500px;
+		border-radius: 10px;
+		border: 3px solid brown;
+	}
+
+	#wyoming{
+		height: 400px;
+		width: 900px;
+		border-radius: 10px;
+		border: 2px solid darkolivegreen;
+	}
+
+	#deer{
+		height: 300px;
+		width: 400px;
+		border-radius: 10px;
+		border: 2px solid darkolivegreen;
+	}
+
+	#yellow{
+		height: 300px;
+		width: 400px;
+		border-radius: 10px;
+		border: 2px solid darkolivegreen;
+	}
+
+	#duo {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	#single {
+		margin-top: 10px;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
 </style>
 <body>
-	<h1>National Parks FAQ</h1>
+	<div id="section1">
+		<div id="FAQ">
+			<h1>National Parks FAQ</h1>
+			<dl>
+				<dt>How many people visit the national parks?</dt>
+				<dd>Total recreation visitors to the national parks in 2018: 318,211,833.</dd>
 
-	<dl>
-		<dt>How many people visit the national parks?</dt>
-		<dd>Total recreation visitors to the national parks in 2018: 318,211,833.</dd>
+				<dt>How old is the National Park System?</dt>
+				<dd>The National Park Service was created by an act signed by President Woodrow Wilson on August 25, 1916.</dd>
 
-		<dt>How old is the National Park System?</dt>
-		<dd>The National Park Service was created by an act signed by President Woodrow Wilson on August 25, 1916.</dd>
+				<dt>How many employees are in the National Park Service?</dt>
+				<dd>Permanent, temporary, and seasonal employees: More than 20,000</dd>
 
-		<dt>How many employees are in the National Park Service?</dt>
-		<dd>Permanent, temporary, and seasonal employees: More than 20,000</dd>
+				<dt>What is the origin of the National Park Service arrowhead?</dt>
+				<dd>The arrowhead was authorized as the official National Park Service emblem by the Secretary of the Interior on July 20, 1951.</dd>
 
-		<dt>What is the origin of the National Park Service arrowhead?</dt>
-		<dd>The arrowhead was authorized as the official National Park Service emblem by the Secretary of the Interior on July 20, 1951.</dd>
+				<dt>How many areas are in the National Park System?</dt>
+				<dd>The system includes 419 areas covering more than 85 million acres in every state, the District of Columbia, American Samoa, Guam, Puerto Rico, and the Virgin Islands.</dd>
 
-		<dt>How many areas are in the National Park System?</dt>
-		<dd>The system includes 419 areas covering more than 85 million acres in every state, the District of Columbia, American Samoa, Guam, Puerto Rico, and the Virgin Islands.</dd>
+				<dt>What is the largest national park site?</dt>
+				<dd>Wrangell-St. Elias National Park and Preserve, AK, at 13.2 million acres.</dd>
 
-		<dt>What is the largest national park site?</dt>
-		<dd>Wrangell-St. Elias National Park and Preserve, AK, at 13.2 million acres.</dd>
+				<dt>What is the National Park Service budget?</dt>
+				<dd>Fiscal Year (FY) 2014 Enacted: $2.98 billion.</dd>
 
-		<dt>What is the National Park Service budget?</dt>
-		<dd>Fiscal Year (FY) 2014 Enacted: $2.98 billion.</dd>
+				<dt>Can I bring my pet to a national park?</dt>
+				<dd>Some national parks welcome pets—in developed areas, on many trails and campgrounds, and in some lodging facilities.</dd>
 
-		<dt>Can I bring my pet to a national park?</dt>
-		<dd>Some national parks welcome pets—in developed areas, on many trails and campgrounds, and in some lodging facilities.</dd>
+				<dt>How do I apply for a job with the National Park Service?</dt>
+				<dd>National Park Service jobs, including both permanent and seasonal positions, are listed on USAJOBs.</dd>
 
-		<dt>How do I apply for a job with the National Park Service?</dt>
-		<dd>National Park Service jobs, including both permanent and seasonal positions, are listed on USAJOBs.</dd>
+				<dt>What do I need to know about driving off road in national parks?</dt>
+				<dd>Before you head out, check with the national parks that you intend to visit. In many national parks, off-road driving is illegal. Where off-road driving is allowed, the National Park Service regulates it.</dd>
+			</dl>
+		</div>
 
-		<dt>What do I need to know about driving off road in national parks?</dt>
-		<dd>Before you head out, check with the national parks that you intend to visit. In many national parks, off-road driving is illegal. Where off-road driving is allowed, the National Park Service regulates it.</dd>
-	</dl>
+		<div id="pictures">
+			<div id="duo">
+				<img id="yellow" src="img/yellowstone.jpg">
+				<img id="deer" src="img/deerNature.jpg">
+			</div>
+			<div id="single">
+				<img id="wyoming" src="img/wyomingPark.jpg">
+			</div>
+		</div>
 
-	<h1>Park List:</h1>
-	<div id="nationalParkDiv">
-		<h3 onmouseover="boldUL(this)" onmouseout="normalUL(this)">Yellowstone National Park</h3>
-		<ul>
-			<li>It is home to Steamboat Geyser, the world's tallest active geyser.</li>
-			<li>It sits on top of an active volcano.</li>
-			<li>Yellowstone National Park is so large that it is located in 3 different states (Wyoming, Montana and Idaho).</li>
-			<li>The Grand Prismatic Spring is one of the largest hot springs in the world and located here.</li>
-		</ul>
-
-		<h3 onmouseover="boldUL(this)" onmouseout="normalUL(this)">Yosemite National Park</h3>
-		<ul>
-			<li>The park’s diverse landscape supports more than 400 species.</li>
-			<li>Yosemite is home to one of the tallest waterfalls in the world.</li>
-			<li>Yosemite is one of the few places in the U.S. where you can see a rainbow at night.</li>
-			<li>Yosemite is a climber’s playground.</li>
-		</ul>
-
-		<h3 onmouseover="boldUL(this)" onmouseout="normalUL(this)">Grand Canyon National Park</h3>
-		<ul>
-			<li>The Grand Canyon is bigger than the state of Rhode Island.</li>
-			<li>The Grand Canyon was carved over some 6 million years.</li>
-			<li>The most dangerous animal in the park is the rock squirrel.</li>
-			<li>Souvenirs may be bought but not taken.</li>
-		</ul>
 	</div>
 
-	<div>
-		<button id="parksEdit">nationalParks</button>
-	</div>
+	<div id="section2">
+		<div>
+			<img id="forest" src="img/nationalPark.jpg">
+		</div>
 
+			<div id="parkList">
+			<h1>Park List:</h1>
+			<div id="nationalParkDiv">
+				<h3 onmouseover="boldUL(this)" onmouseout="normalUL(this)">Yellowstone National Park</h3>
+				<ul>
+					<li>It is home to Steamboat Geyser, the world's tallest active geyser.</li>
+					<li>It sits on top of an active volcano.</li>
+					<li>Yellowstone National Park is so large that it is located in 3 different states (Wyoming, Montana and Idaho).</li>
+					<li>The Grand Prismatic Spring is one of the largest hot springs in the world and located here.</li>
+				</ul>
+
+				<h3 onmouseover="boldUL(this)" onmouseout="normalUL(this)">Yosemite National Park</h3>
+				<ul>
+					<li>The park’s diverse landscape supports more than 400 species.</li>
+					<li>Yosemite is home to one of the tallest waterfalls in the world.</li>
+					<li>Yosemite is one of the few places in the U.S. where you can see a rainbow at night.</li>
+					<li>Yosemite is a climber’s playground.</li>
+				</ul>
+
+				<h3 onmouseover="boldUL(this)" onmouseout="normalUL(this)">Grand Canyon National Park</h3>
+				<ul>
+					<li>The Grand Canyon is bigger than the state of Rhode Island.</li>
+					<li>The Grand Canyon was carved over some 6 million years.</li>
+					<li>The most dangerous animal in the park is the rock squirrel.</li>
+					<li>Souvenirs may be bought but not taken.</li>
+				</ul>
+				<div>
+					<button id="parksEdit">nationalParks</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script>
 		let nationalParks = document.getElementById('nationalParkDiv');
 		let btn = document.getElementById('parksEdit');
+		let yellowStoneUL = nationalParks.children[1];
+		let yosemiteUL = nationalParks.children[3];
+		let grandCanyonUL = nationalParks.children[5];
 
-		console.log(nationalParks);
+		console.log(yellowStoneUL);
 
 		btn.addEventListener('click', function (event) {
 			nationalParks.children[1].lastElementChild.style.backgroundColor = 'lightBlue';
@@ -92,6 +227,19 @@
 		function normalUL(x) {
 			x.nextElementSibling.style.fontWeight ='normal';
 		}
+
+		yellowStoneUL.addEventListener('click', function (event) {
+			this.firstElementChild.style.color = 'blue';
+		});
+
+		yosemiteUL.addEventListener('click', function (event) {
+			this.firstElementChild.style.color = 'blue';
+		});
+
+		grandCanyonUL.addEventListener('click', function (event) {
+			this.firstElementChild.style.color = 'blue';
+		});
+
 	</script>
 	</body>
 </html>
