@@ -4,8 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Parks</title>
 </head>
-	<body>
+<style>
 
+</style>
+<body>
 	<h1>National Parks FAQ</h1>
 
 	<dl>
@@ -40,5 +42,56 @@
 		<dd>Before you head out, check with the national parks that you intend to visit. In many national parks, off-road driving is illegal. Where off-road driving is allowed, the National Park Service regulates it.</dd>
 	</dl>
 
+	<h1>Park List:</h1>
+	<div id="nationalParkDiv">
+		<h3 onmouseover="boldUL(this)" onmouseout="normalUL(this)">Yellowstone National Park</h3>
+		<ul>
+			<li>It is home to Steamboat Geyser, the world's tallest active geyser.</li>
+			<li>It sits on top of an active volcano.</li>
+			<li>Yellowstone National Park is so large that it is located in 3 different states (Wyoming, Montana and Idaho).</li>
+			<li>The Grand Prismatic Spring is one of the largest hot springs in the world and located here.</li>
+		</ul>
+
+		<h3 onmouseover="boldUL(this)" onmouseout="normalUL(this)">Yosemite National Park</h3>
+		<ul>
+			<li>The park’s diverse landscape supports more than 400 species.</li>
+			<li>Yosemite is home to one of the tallest waterfalls in the world.</li>
+			<li>Yosemite is one of the few places in the U.S. where you can see a rainbow at night.</li>
+			<li>Yosemite is a climber’s playground.</li>
+		</ul>
+
+		<h3 onmouseover="boldUL(this)" onmouseout="normalUL(this)">Grand Canyon National Park</h3>
+		<ul>
+			<li>The Grand Canyon is bigger than the state of Rhode Island.</li>
+			<li>The Grand Canyon was carved over some 6 million years.</li>
+			<li>The most dangerous animal in the park is the rock squirrel.</li>
+			<li>Souvenirs may be bought but not taken.</li>
+		</ul>
+	</div>
+
+	<div>
+		<button id="parksEdit">nationalParks</button>
+	</div>
+
+	<script>
+		let nationalParks = document.getElementById('nationalParkDiv');
+		let btn = document.getElementById('parksEdit');
+
+		console.log(nationalParks);
+
+		btn.addEventListener('click', function (event) {
+			nationalParks.children[1].lastElementChild.style.backgroundColor = 'lightBlue';
+			nationalParks.children[3].lastElementChild.style.backgroundColor = 'lightBlue';
+			nationalParks.children[5].lastElementChild.style.backgroundColor = 'lightBlue';
+		});
+
+		function boldUL(x) {
+			x.nextElementSibling.style.fontWeight ='bold';
+		}
+
+		function normalUL(x) {
+			x.nextElementSibling.style.fontWeight ='normal';
+		}
+	</script>
 	</body>
 </html>
