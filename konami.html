@@ -56,7 +56,6 @@
 
 		function aniamte() {
 			requestAnimationFrame(aniamte);
-			// c.clearRect(0, 0, innerWidth , innerHeight);
 
 			let x = Math.floor(Math.random() * window.innerWidth);
 			let y = Math.floor(Math.random() * window.innerHeight);
@@ -66,14 +65,14 @@
 			ctx.arc(x, y, radius, 0, 2 * Math.PI);
 			ctx.stroke();
 
+			// c.clearRect(0, 0, innerWidth , innerHeight);
 		}
 
-		for (let i = 0; i < 1; i++) {
-			aniamte();
-		}
+		aniamte();
+		// for (let i = 0; i < 1; i++) {
+		// }
 
 		action.addEventListener("keyup", function(event) {
-
 			sequence += event.key;
 			if (sequence === 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightbaEnter') {
 				c.style.animation = 'backgroundChange 1s infinite';
