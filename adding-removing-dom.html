@@ -48,15 +48,50 @@
 		(function() {
 			document.addEventListener("DOMContentLoaded", function () {
 
-				// add your code here
+				let btn = document.querySelector('#add-todo');
 
-				function addTodo() {
+				btn.addEventListener('click', function (event) {
+					let invalidInput = document.querySelector('.invalid-feedback');
+					let input = document.querySelector('#add-todo-text');
 
+					if (input.value.length === 0) {
+						alert(invalidInput.value);
+					} else {
+						let newToDo = document.createElement('div');
+						newToDo.classList.add('card');
+						newToDo.classList.add('col-2');
+
+						let cardBody = document.createElement('div');
+						cardBody.classList.add('card-body');
+						cardBody.innerText = input.value;
+
+						let cardFooter = document.createElement('div');
+						cardFooter.classList.add('card-footer');
+
+						let deleteBtn = document.createElement('button');
+						deleteBtn.classList.add('delete-todo');
+						deleteBtn.innerText = 'Delete Todo'
+
+						cardFooter.appendChild(deleteBtn);
+						newToDo.appendChild(cardBody);
+						newToDo.appendChild(cardFooter);
+
+						document.querySelector('#my-todos').appendChild(newToDo);
+					}
+				});
+
+				function addDeleteEventListeners() {
+					let allDeleteBtn = document.querySelectorAll('.delete-todo');
+					for(let i = 0; i < allDeleteBtn.length; i++) {
+						allDeleteBtn[i].addEventListener('click', deleteTodo);
+					}
 				}
 
 				function deleteTodo(event) {
-
+					this.parentElement.parentElement.remove();
 				}
+
+				addDeleteEventListeners();
 			});
 		})();
 	</script>
