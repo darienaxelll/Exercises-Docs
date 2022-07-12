@@ -1,55 +1,121 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Online Store</title>
-</head>
-<body>
-
-<h1>My Tool Store</h1>
-
-<table id="products">
-	<thead>
-	<tr>
-		<th>Title</th>
-		<th>Quantity</th>
-		<th>Price</th>
-		<th>Categories</th>
-	</tr>
-	</thead>
-	<tbody id="insertProducts"></tbody>
-</table>
-
-<script>
-	(async function() {
-		"use strict";
-		// TODO: Create an AJAX GET request for the file under data/inventory.json
-
-		async function getInventory(tool) {
-			let response = await fetch('data/inventory.json' + tool);
-			return response.json();
+	<head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+		<title>Online Store</title>
+	</head>
+	<body>
+	<style>
+		@keyframes header {
+			0% {background: #7B7B7C}
+			0% {background: #ECEEFF}
+			0% {background: #7B7B7C}
 		}
 
-		console.log(await getInventory('Drill'));
+		body{
+			background: navajowhite;
+			font-family: 'Montserrat', sans-serif;
+		}
 
-		// try {
-		// 	let response = await fetch('data/inventory.json');
-		// 	let inventory = response.json();
-		//
-		// } catch (error) {
-		// 	console.error('This promise is Rejected!', error);
-		// } finally {
-		// 	console.log(
-		// 			'This promise is settled, meaning it has been resolved or rejected.'
-		// 	);
-		// }
 
-		// TODO: Take the data from inventory.json and append it to the products table
-		//       HINT: Your data should come back as a JSON object; use console.log() to inspect
-		//             its contents and fields
-		//       HINT: You will want to target #insertProducts for your new HTML elements
-	})();
-</script>
+		h1 {
+			width: 40%;
+			font-size: 50px;
+			margin-top: 30px;
+			display: flex;
+			justify-content: center;
+			border-radius: 10px;
+			border: 2px solid black;
+			animation: header infinite 10s;
+		}
 
-</body>
+		.container{
+			display: flex;
+			justify-content: center;
+		}
+
+		table {
+			margin-top: 45px;
+			background: #F5F5DC;
+			border-radius: 10%;
+			font-size: 25px;
+		}
+
+		th {
+			padding: 50px;
+			text-decoration: underline;
+		}
+
+		td {
+			padding: 50px;
+		}
+
+		button {
+			margin: 40px 0;
+			border-radius: 10px;
+		}
+	</style>
+
+	<nav class="navbar navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand"> Rookie HardWare Store</a>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h1>My Tool Store</h1>
+	</div>
+
+	<div class="container">
+		<table id="products">
+			<thead>
+			<tr>
+				<th>Title</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Categories</th>
+			</tr>
+			</thead>
+			<tbody id="insertProducts"></tbody>
+		</table>
+	</div>
+
+	<div class="container">
+		<button>Refresh</button>
+	</div>
+
+	<script>
+		(async function() {
+			"use strict";
+			// TODO: Create an AJAX GET request for the file under data/inventory.json
+
+			async function getInventory() {
+				let response = await fetch('data/inventory.json');
+				return response.json();
+			}
+
+			// TODO: Take the data from inventory.json and append it to the products table
+			//       HINT: Your data should come back as a JSON object; use console.log() to inspect
+			//             its contents and fields
+			//       HINT: You will want to target #insertProducts for your new HTML elements
+
+			let tools = await getInventory();
+			let tbody = document.querySelector('#insertProducts');
+			let refresh = document.querySelector('button');
+
+			for (let i = 0; i < tools.length; i++) {
+
+				tbody.innerHTML += `<tr><td>${tools[i].title}</td><td>${tools[i].quantity}</td><td>${tools[i].price}</td><td>${tools[i].categories}</td></tr>`
+			}
+
+			refresh.addEventListener('click', function (event) {
+				location.reload();
+			});
+
+		})();
+	</script>
+
+	</body>
 </html>
 
