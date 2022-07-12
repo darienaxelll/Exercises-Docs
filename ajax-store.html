@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online Store</title>
+</head>
+<body>
+
+<h1>My Tool Store</h1>
+
+<table id="products">
+	<thead>
+	<tr>
+		<th>Title</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		<th>Categories</th>
+	</tr>
+	</thead>
+	<tbody id="insertProducts"></tbody>
+</table>
+
+<script>
+	(async function() {
+		"use strict";
+		// TODO: Create an AJAX GET request for the file under data/inventory.json
+
+		async function getInventory(tool) {
+			let response = await fetch('data/inventory.json' + tool);
+			return response.json();
+		}
+
+		console.log(await getInventory('Drill'));
+
+		// try {
+		// 	let response = await fetch('data/inventory.json');
+		// 	let inventory = response.json();
+		//
+		// } catch (error) {
+		// 	console.error('This promise is Rejected!', error);
+		// } finally {
+		// 	console.log(
+		// 			'This promise is settled, meaning it has been resolved or rejected.'
+		// 	);
+		// }
+
+		// TODO: Take the data from inventory.json and append it to the products table
+		//       HINT: Your data should come back as a JSON object; use console.log() to inspect
+		//             its contents and fields
+		//       HINT: You will want to target #insertProducts for your new HTML elements
+	})();
+</script>
+
+</body>
+</html>
+
