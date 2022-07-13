@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100&family=Montserrat:wght@100&display=swap" rel="stylesheet">
+		<title>Blog Page</title>
+	</head>
+	<style>
+		@keyframes backgroundChange {
+			0% {background: #7B7B7C}
+			25% {background: #83A7A7}
+			50% {background: #ACAC9A}
+			75% {background: darkolivegreen}
+			100% {background: #7B7B7C}
+		}
+
+		body {
+			animation: backgroundChange infinite 10s;
+		}
+
+		p{
+			font-family: 'Libre Franklin', sans-serif;
+		}
+
+		#date {
+			font-size: large;
+		}
+
+		#content {
+			background: #B9DEDE;
+			border-radius: 10px;
+			padding: 5px;
+		}
+
+		.card {
+			/* Add shadows to create the "card" effect */
+			width: 75%;
+			margin-left: 170px;
+			margin-top: 90px;
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			transition: 0.3s;
+			background: #F5F5DC;
+			border-radius: 10px;
+		}
+
+		/* On mouse-over, add a deeper shadow */
+		.card:hover {
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+		}
+
+		/* Add some padding inside the card container */
+		.container {
+			margin-top: 30px;
+			padding: 2px 16px;
+		}
+	</style>
+	<body>
+	<div id="post">
+
+	</div>
+	</body>
+<script>
+	(async function() {
+		'use strict';
+
+		async function getPost() {
+			let response = await fetch('data/blog.json');
+			return response.json();
+		}
+
+		let post = await getPost();
+		let container = document.querySelector('#post');
+
+		for (let i = 0; i < post.length; i++) {
+			container.innerHTML += `<div class="card">
+									  <div class="container">
+										<h4><b>${post[i].title}</b></h4>
+										<p id="date">${post[i].date}</p>
+										<p id="content">${post[i].content}</p>
+									  </div>
+									</div>`
+		}
+
+	})();
+</script>
+</html>
