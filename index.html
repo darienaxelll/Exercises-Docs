@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link href="https://fonts.googleapis.com/css2?family=Gulzar&family=Libre+Franklin:wght@100&family=Montserrat:wght@100&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<style>
+	body {
+		background: navajowhite;
+	}
+
+	#container {
+		margin-left: 500px;
+		width: 750px;
+		height: 750px;
+		background: midnightblue;
+		border-radius: 50%;
+		opacity: 50%;
+		z-index: 1000;
+	}
+
+	#object {
+		width: 250px;
+		height: 250px;
+		background: #F5F5DC;
+		border-radius: 50%;
+		animation: moveAround 10s ease-in infinite alternate;
+	}
+
+	#container:hover #object {
+		animation-play-state: paused;
+	}
+
+	#header {
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+	.letter {
+		rotate:;
+		font-size: 40px;
+		padding: 0 20px;
+		background-color: white;
+		border: 1px solid black;
+		border-radius: 30%;
+	}
+
+	.letter:hover {
+		animation: letterDrop 4s infinite alternate;
+		cursor: pointer;
+	}
+
+	#textBox {
+		margin-top: 150px;
+		float: left;
+		width: 40%;
+		padding: 40px 0 ;
+		background-color: white;
+		border: 1px solid black;
+		border-radius: 10px;
+	}
+
+	#textBox:hover {
+		background: black;
+		border: fuchsia 1px solid;
+		color: white;
+		font-size: large;
+		transform: rotate(2deg) translateX(10px);
+		cursor: pointer;
+	}
+
+	h3, h4 {
+		padding: 0 10px;
+	}
+
+	p {
+		padding: 0 10px;
+		font-family: 'Gulzar', serif;
+	}
+
+	a {
+		color: black;
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: white;
+	}
+
+	canvas {
+		background-color: #B9DEDE;
+		border: 1px solid black;
+	}
+
+	@keyframes moveAround {
+		0% {
+			transform: translateX(0%);
+			background-color: #F5F5DC;
+		}
+		33% {
+			transform: translateY(200%);
+			background-color: #848487;
+		}
+		66% {
+			transform: translateX(250%) translateY(200%);
+			background-color: #B9DEDE;
+		}
+		100% {
+			transform: translateX(250%);
+			background-color: #3B94D9;
+		}
+	}
+
+	@keyframes letterDrop {
+		100% {transform: translateY(100%) rotate(45deg);}
+	}
+
+
+</style>
+<div id="header">
+	<div class="letter">T</div>
+	<div class="letter">I</div>
+	<div class="letter">T</div>
+	<div class="letter">L</div>
+	<div class="letter">E</div>
+</div>
+
+<!--<div id="boxContainer">-->
+<!--	<div class="bundle">-->
+<!--		<div class="box"></div>-->
+<!--		<div class="surprise">Random Text</div>-->
+<!--	</div>-->
+<!--	<div class="bundle">-->
+<!--		<div class="box"></div>-->
+<!--		<div class="surprise">Random Text</div>-->
+<!--	</div>-->
+<!--	<div class="bundle">-->
+<!--		<div class="box"></div>-->
+<!--		<div class="surprise">Random Text</div>-->
+<!--	</div>-->
+<!--</div>-->
+
+<div id="textBox">
+	<a href="https://www.rd.com/list/funny-poems/">
+	<h3>My Shadow</h3>
+	<h4>Robert Louis Stevenson</h4>
+	<p>
+		I have a little shadow that goes in and out with me,
+		And what can be the use of him is more than I can see.
+		He is very, very like me from the heels up to the head;
+		And I see him jump before me, when I jump into my bed.
+
+		The funniest thing about him is the way he likes to grow—
+		Not at all like proper children, which is always very slow;
+		For he sometimes shoots up taller like an india-rubber ball,
+		And he sometimes gets so little that there’s none of him at all.
+	</p>
+	</a>
+</div>
+
+<div id="container">
+	<div id="object"></div>
+</div>
+
+<canvas></canvas>
+<script>
+	let c = document.querySelector('canvas');
+</script>
+</body>
+</html>
