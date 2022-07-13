@@ -106,7 +106,12 @@
 
 			for (let i = 0; i < tools.length; i++) {
 
-				tbody.innerHTML += `<tr><td>${tools[i].title}</td><td>${tools[i].quantity}</td><td>${tools[i].price}</td><td>${tools[i].categories}</td></tr>`
+				tbody.innerHTML += `<tr>
+										<td>${tools[i].title}</td>
+										<td>${tools[i].quantity}</td>
+										<td>${tools[i].price}</td>
+										<td>${tools[i].categories.join(', ')}</td>
+									</tr>`
 			}
 
 			refresh.addEventListener('click', function (event) {
