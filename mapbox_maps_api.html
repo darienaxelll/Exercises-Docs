@@ -7,32 +7,137 @@
 	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 	<!-- Custom CSS -->
 	<style>
+		body {
+			background-color: navajowhite;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		#container {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+		}
+
+		#formDiv {
+		}
+
 		#map {
 			/* the width and height may be set to any size */
-			width: 100%;
+			width: 75%;
 			height: 700px;
+			border-radius: 10px;
+			border: 1px solid black;
 		}
 	</style>
 </head>
 <body>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
 
 <h1>My First Mapbox Map!</h1>
 
 <!-- The HTML element that serves as the Mapbox container -->
-<div id='map'></div>
+<div id="container">
+	<div id='map'></div>
+</div>
+
+<button id="drop-marker">My Favorite Restaurants</button>
 
 <!-- Mapbox JS -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
-
+<script src="js/keys.js"></script>
 <!-- Custom JS -->
 <script>
-	mapboxgl.accessToken = YOUR_API_TOKEN_HERE;
-	let map = new mapboxgl.Map({
-		container: 'map',
-		style: 'mapbox://styles/mapbox/streets-v9',
-		zoom: 10,
-		center: [-98.4916, 29.4252]
-	});
+	(async function() {
+
+		let btn = document.querySelector('button');
+
+		mapboxgl.accessToken = mapboxAPIKey;
+		const map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/mapbox/streets-v9',
+			zoom: 10,
+			center: [-97.7437, 30.27112]
+		});
+
+		function getLatLngFromAddress(address, token = mapboxAPIKey) {
+			const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+			return fetch(`${url}${encodeURIComponent(address)}.json?access_token=${token}`)
+					.then(async function(res) {
+						const data = await res.json();
+						return data.features[0].center;
+					});
+		}
+
+		let restaurants = [];
+
+		let coords = await getLatLngFromAddress('Guillermo\'s');
+		restaurants.push(coords);
+		coords = await getLatLngFromAddress('Market on Houston')
+		restaurants.push(coords);
+		coords = await getLatLngFromAddress('Acenar')
+		restaurants.push(coords);
+
+		function getMarkerForLocation(locationInfo) {
+			let popup = new mapboxgl.Popup();
+			const locationHTML = getLocationHTML(locationInfo);
+			popup.setHTML(locationHTML);
+
+			let marker = new mapboxgl.Marker();
+			marker.setPopup(popup);
+			marker.setLngLat(locationInfo.latLng);
+			return marker;
+		}
+
+		function getLocationHTML(locationInfo) {
+			return `
+<div class="card">
+    <h5 class="card-title bg">${locationInfo.address}</h5>
+    <div class="card-body d-flex justify-content-center">
+        Restaurant picture goes here
+    </div>
+    <div class="card-footer">${locationInfo.description}</div>
+`
+		}
+
+		function getLocationInfoFromAddress(address, token = mapboxAPIKey) {
+			// location info is {
+			//  "latLng" : [lat lng coords],
+			//  "description": "description of address from map box" }
+			const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+			return fetch(`${url}${encodeURIComponent(address)}.json?access_token=${token}`)
+					.then(async function(res) {
+						const data = await res.json();
+						console.log(data);
+						const locationInfo = {
+							"address": address,
+							"latLng": data.features[0].center,
+							"description": data.features[0].place_name
+						};
+						return locationInfo;
+					});
+		}
+
+		function getLatLngFromAddress(address, token = mapboxAPIKey) {
+			const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+			return fetch(`${url}${encodeURIComponent(address)}.json?access_token=${token}`)
+					.then(async function(res) {
+						const data = await res.json();
+						return data.features[0].center;
+					});
+		}
+
+		document.querySelector("#drop-marker").addEventListener("click", function (event) {
+			restaurants.forEach(function(restaurant) {
+				const marker = getMarkerForLocation(restaurant);
+				marker.addTo(map);
+			})
+		});
+
+	})();
 </script>
 </body>
 </html>
