@@ -125,6 +125,8 @@
 	<script>
 		(async function() {
 
+			let userInput = document.querySelector('#userInput');
+
 			mapboxgl.accessToken = mapboxAPIKey;
 			let map = new mapboxgl.Map({
 				container: 'map',
@@ -133,16 +135,37 @@
 				center: [-98.4916, 29.4252]
 			});
 
-			let userInput = document.querySelector('#userInput');
+			async function getUserInput() {
+				let userInput = document.querySelector('#userInput');
 
-			document.querySelector('#searchBtn').addEventListener('click', async function (event) {
 				geocode(userInput.value, mapboxAPIKey).then(function(result) {
-					console.log(result);
 					map.setCenter(result);
 					map.setZoom(10);
-				});
-			});
 
+					let [long, latitude] = result;
+					console.log(long);
+					console.log(latitude);
+
+					let queryParams = new URLSearchParams({
+						APPID: OPEN_WEATHER_APPID,
+						lat: latitude,
+						lon: long,
+						units: "imperial"
+					});
+
+					fetch("http://api.openweathermap.org/data/2.5/forecast?" + queryParams, {
+								method: "GET"
+							}
+					).then(async function(response) {
+						console.log(await response.json());
+					});
+
+				});
+			}
+
+
+
+			document.querySelector('#searchBtn').addEventListener('click', getUserInput)
 
 
 		})();
