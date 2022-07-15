@@ -7,8 +7,74 @@
 		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 		<!-- Custom CSS -->
 		<style>
+
+			body{
+				background-color: #F5F5DC;
+			}
+
+			#navbar {
+				margin: 0;
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-around;
+				background-color: #83A7A7;
+				border-radius: 10px;
+				border: 1px solid black;
+			}
+
+			a {
+				padding: 15px;
+				text-decoration: none;
+				color: black;
+			}
+
+			#logo {
+				flex: 3;
+				font-size: xx-large;
+			}
+
+			.link {
+				margin-top: 10px;
+				font-size: larger;
+			}
+
+			#container {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-around;
+			}
+
+			#forecast-address {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+			}
+
+			.card {
+				width: 180%;
+				height: 300px;
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+				transition: 0.3s;
+				border: 1px solid black;
+				border-radius: 10px;
+				text-align: center;
+				background-color: #474838;
+				color: white;
+				font-size: large;
+			}
+
+			.card:hover {
+				box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+			}
+
+			.cardBody {
+				margin-top: 30px;
+				padding: 2px 16px;
+			}
+
 			#map {
-				/* the width and height may be set to any size */
+				margin-top: 20px;
 				width: 50%;
 				height: 700px;
 				border-radius: 10px;
@@ -17,15 +83,47 @@
 		</style>
 	</head>
 	<body>
+	<div id="top">
+		<nav id="navbar">
+			<a href="#" id="logo">My Weather App <i class="fa-solid fa-cloud"></i></a>
+			<a href="#" class="link">Cloud Radar</a>
+			<a href="#" class="link">Features</a>
+			<a href="#" class="link">Contact Us <i class="fa-solid fa-phone"></i></a>
+			<a href="#" class="link">Login <i class="fa-solid fa-circle-user"></i></a>
+		</nav>
+	</div>
 
-	<!-- The HTML element that serves as the Mapbox container -->
-	<div id='map'></div>
+	<div id="container">
+		<div id="forecast-address">
+			<div id="addressInput">
+				<div class="card">
+					<div class="cardBody">
+						<h4><b>Search location for weather !</b></h4>
+						<input type="text" placeholder="Enter Address here...">
+					</div>
+				</div>
+			</div>
+			<div id="forecastCard">
+				<div class="card">
+					<div class="cardBody">
+						<h4><b>5 Day Forecast</b></h4>
+						<p>Architect & Engineer</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id='map'></div>
+	</div>
 
 	<!-- Mapbox JS -->
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+	<script src="https://kit.fontawesome.com/ea1f9afeed.js" crossorigin="anonymous"></script>
+	<script src="js/mapbox-geocoder-utils.js"></script>
 	<script src="js/keys.js"></script>
 	<!-- Custom JS -->
 	<script>
+		(async function() {
+
 		mapboxgl.accessToken = mapboxAPIKey;
 		let map = new mapboxgl.Map({
 			container: 'map',
@@ -33,6 +131,23 @@
 			zoom: 9,
 			center: [-98.4916, 29.4252]
 		});
+
+			let queryParams = new URLSearchParams({
+				APPID: OPEN_WEATHER_APPID,
+				lat:    29.423017,
+				lon:   -98.48527,
+				units: "imperial"
+			});
+// concat the query parameters onto the URL
+			fetch("http://api.openweathermap.org/data/2.5/onecall?" + queryParams, {
+						method: "GET"
+					}
+			).then(async function(response) {
+				// use await to wait for the json data and then do something with it
+				console.log(await response.json());
+			});
+
+		})();
 	</script>
 	</body>
 </html>
