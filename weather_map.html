@@ -101,6 +101,9 @@
 						<h4><b>Search location for weather !</b></h4>
 						<input type="text" id="userInput" placeholder="Enter Address here...">
 						<button id="searchBtn">Search</button>
+						<div id="current-weather">
+
+						</div>
 					</div>
 				</div>
 			</div>
@@ -108,7 +111,9 @@
 				<div class="card">
 					<div class="cardBody">
 						<h4><b>5 Day Forecast</b></h4>
-						<p>Architect & Engineer</p>
+						<div id="forecast-body">
+
+						</div>
 					</div>
 				</div>
 			</div>
@@ -125,8 +130,6 @@
 	<script>
 		(async function() {
 
-			let userInput = document.querySelector('#userInput');
-
 			mapboxgl.accessToken = mapboxAPIKey;
 			let map = new mapboxgl.Map({
 				container: 'map',
@@ -137,6 +140,7 @@
 
 			async function getUserInput() {
 				let userInput = document.querySelector('#userInput');
+				let currentWeather = document.querySelector('#current-weather');
 
 				geocode(userInput.value, mapboxAPIKey).then(function(result) {
 					map.setCenter(result);
@@ -153,17 +157,16 @@
 						units: "imperial"
 					});
 
-					fetch("http://api.openweathermap.org/data/2.5/forecast?" + queryParams, {
+					fetch("http://api.openweathermap.org/data/2.5/weather?" + queryParams, {
 								method: "GET"
 							}
-					).then(async function(response) {
-						console.log(await response.json());
+					).then(function(response) {
+						return response.json()
+					}).then(function (data) {
+						console.log(data.main);
 					});
-
 				});
 			}
-
-
 
 			document.querySelector('#searchBtn').addEventListener('click', getUserInput)
 
