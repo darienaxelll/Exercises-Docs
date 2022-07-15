@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Weather Map App</title>
+		<!-- Mapbox CSS -->
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+		<!-- Custom CSS -->
+		<style>
+			#map {
+				/* the width and height may be set to any size */
+				width: 50%;
+				height: 700px;
+				border-radius: 10px;
+				border: solid 1px black;
+			}
+		</style>
+	</head>
+	<body>
+
+	<!-- The HTML element that serves as the Mapbox container -->
+	<div id='map'></div>
+
+	<!-- Mapbox JS -->
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+	<script src="js/keys.js"></script>
+	<!-- Custom JS -->
+	<script>
+		mapboxgl.accessToken = mapboxAPIKey;
+		let map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/mapbox/streets-v9',
+			zoom: 9,
+			center: [-98.4916, 29.4252]
+		});
+	</script>
+	</body>
+</html>
