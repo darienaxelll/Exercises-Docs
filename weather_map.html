@@ -99,7 +99,8 @@
 				<div class="card">
 					<div class="cardBody">
 						<h4><b>Search location for weather !</b></h4>
-						<input type="text" placeholder="Enter Address here...">
+						<input type="text" id="userInput" placeholder="Enter Address here...">
+						<button id="searchBtn">Search</button>
 					</div>
 				</div>
 			</div>
@@ -124,28 +125,25 @@
 	<script>
 		(async function() {
 
-		mapboxgl.accessToken = mapboxAPIKey;
-		let map = new mapboxgl.Map({
-			container: 'map',
-			style: 'mapbox://styles/mapbox/streets-v9',
-			zoom: 9,
-			center: [-98.4916, 29.4252]
-		});
+			mapboxgl.accessToken = mapboxAPIKey;
+			let map = new mapboxgl.Map({
+				container: 'map',
+				style: 'mapbox://styles/mapbox/streets-v9',
+				zoom: 9,
+				center: [-98.4916, 29.4252]
+			});
 
-			let queryParams = new URLSearchParams({
-				APPID: OPEN_WEATHER_APPID,
-				lat:    29.423017,
-				lon:   -98.48527,
-				units: "imperial"
+			let userInput = document.querySelector('#userInput');
+
+			document.querySelector('#searchBtn').addEventListener('click', async function (event) {
+				geocode(userInput.value, mapboxAPIKey).then(function(result) {
+					console.log(result);
+					map.setCenter(result);
+					map.setZoom(10);
+				});
 			});
-// concat the query parameters onto the URL
-			fetch("http://api.openweathermap.org/data/2.5/onecall?" + queryParams, {
-						method: "GET"
-					}
-			).then(async function(response) {
-				// use await to wait for the json data and then do something with it
-				console.log(await response.json());
-			});
+
+
 
 		})();
 	</script>
