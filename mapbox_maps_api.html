@@ -21,15 +21,13 @@
 			justify-content: space-around;
 		}
 
-		#formDiv {
-		}
-
 		#map {
 			/* the width and height may be set to any size */
-			width: 75%;
-			height: 700px;
+			width: 100%;
+			height: 600px;
 			border-radius: 10px;
 			border: 1px solid black;
+			padding-bottom: 50px;
 		}
 	</style>
 </head>
@@ -44,100 +42,73 @@
 	<div id='map'></div>
 </div>
 
-<button id="drop-marker">My Favorite Restaurants</button>
-
 <!-- Mapbox JS -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <script src="js/keys.js"></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
 <!-- Custom JS -->
 <script>
+
 	(async function() {
-
-		let btn = document.querySelector('button');
-
 		mapboxgl.accessToken = mapboxAPIKey;
 		const map = new mapboxgl.Map({
-			container: 'map',
-			style: 'mapbox://styles/mapbox/streets-v9',
-			zoom: 10,
-			center: [-97.7437, 30.27112]
+			container: 'map', // container ID
+			style: 'mapbox://styles/mapbox/streets-v11', // style URL
+			center: [-97.743, 30.267], // starting position [lng, lat]
+			zoom: 9 // starting zoom
 		});
 
-		function getLatLngFromAddress(address, token = mapboxAPIKey) {
-			const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
-			return fetch(`${url}${encodeURIComponent(address)}.json?access_token=${token}`)
-					.then(async function(res) {
-						const data = await res.json();
-						return data.features[0].center;
-					});
-		}
+		map.addControl(
+				new MapboxGeocoder({
+					accessToken: mapboxgl.accessToken,
+					mapboxgl: mapboxgl
+				})
+		);
+
+		const markerHeight = 50;
+		const markerRadius = 10;
+		const linearOffset = 25;
+		const popupOffsets = {
+			'top': [0, 0],
+			'top-left': [0, 0],
+			'top-right': [0, 0],
+			'bottom': [0, -markerHeight],
+			'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+			'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+			'left': [markerRadius, (markerHeight - markerRadius) * -1],
+			'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+		};
 
 		let restaurants = [];
 
-		let coords = await getLatLngFromAddress('Guillermo\'s');
-		restaurants.push(coords);
-		coords = await getLatLngFromAddress('Market on Houston')
-		restaurants.push(coords);
-		coords = await getLatLngFromAddress('Acenar')
-		restaurants.push(coords);
+		let info = await geocode("Taco Shack, Austin TX", mapboxAPIKey).then(function (result) {
+			return result;
+		});
+		info.name = "Taco Shack, Austin TX";
+		restaurants.push(info);
+		info = await geocode("Odd Duck, Austin TX", mapboxAPIKey).then(function (result) {
+			return result;
+		});
+		info.name = "Odd Duck, Austin TX";
+		restaurants.push(info);
+		info = await geocode("Hestia, Austin TX", mapboxAPIKey).then(function (result) {
+			return result;
+		});
+		info.name = "Hestia, Austin TX";
+		restaurants.push(info);
 
-		function getMarkerForLocation(locationInfo) {
-			let popup = new mapboxgl.Popup();
-			const locationHTML = getLocationHTML(locationInfo);
-			popup.setHTML(locationHTML);
-
-			let marker = new mapboxgl.Marker();
-			marker.setPopup(popup);
-			marker.setLngLat(locationInfo.latLng);
-			return marker;
-		}
-
-		function getLocationHTML(locationInfo) {
-			return `
-<div class="card">
-    <h5 class="card-title bg">${locationInfo.address}</h5>
-    <div class="card-body d-flex justify-content-center">
-        Restaurant picture goes here
-    </div>
-    <div class="card-footer">${locationInfo.description}</div>
-`
-		}
-
-		function getLocationInfoFromAddress(address, token = mapboxAPIKey) {
-			// location info is {
-			//  "latLng" : [lat lng coords],
-			//  "description": "description of address from map box" }
-			const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
-			return fetch(`${url}${encodeURIComponent(address)}.json?access_token=${token}`)
-					.then(async function(res) {
-						const data = await res.json();
-						console.log(data);
-						const locationInfo = {
-							"address": address,
-							"latLng": data.features[0].center,
-							"description": data.features[0].place_name
-						};
-						return locationInfo;
-					});
-		}
-
-		function getLatLngFromAddress(address, token = mapboxAPIKey) {
-			const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
-			return fetch(`${url}${encodeURIComponent(address)}.json?access_token=${token}`)
-					.then(async function(res) {
-						const data = await res.json();
-						return data.features[0].center;
-					});
-		}
-
-		document.querySelector("#drop-marker").addEventListener("click", function (event) {
-			restaurants.forEach(function(restaurant) {
-				const marker = getMarkerForLocation(restaurant);
-				marker.addTo(map);
-			})
+		restaurants.forEach(function (info) {
+			let marker = new mapboxgl.Marker({
+				color: "rgba(255,0,0,0.93)",
+				draggable: true
+			}).setLngLat(info).addTo(map);
+			let popUp = new mapboxgl.Popup({offset: popupOffsets, className: 'my-class'})
+					.setLngLat(info)
+					.setHTML(info.name)
+					.addTo(map);
 		});
 
-	})();
+	}());
 </script>
 </body>
 </html>
