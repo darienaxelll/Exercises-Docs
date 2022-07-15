@@ -42,12 +42,20 @@
 	<div id='map'></div>
 </div>
 
+<button id="marker">Drop Markets</button>
+<button id="zoomIn">Zoom In</button>
+<button id="zoomOut">Zoom Out</button>
+
 <!-- Mapbox JS -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 <script src="js/keys.js"></script>
 <script src="js/mapbox-geocoder-utils.js"></script>
 <!-- Custom JS -->
 <script>
+
+	let btn = document.querySelector('#marker');
+	let btnIn = document.querySelector('#zoomIn');
+	let btnOut = document.querySelector('#zoomOut');
 
 	(async function() {
 		mapboxgl.accessToken = mapboxAPIKey;
@@ -97,16 +105,22 @@
 		info.name = "Hestia, Austin TX";
 		restaurants.push(info);
 
-		restaurants.forEach(function (info) {
-			let marker = new mapboxgl.Marker({
-				color: "rgba(255,0,0,0.93)",
-				draggable: true
-			}).setLngLat(info).addTo(map);
-			let popUp = new mapboxgl.Popup({offset: popupOffsets, className: 'my-class'})
-					.setLngLat(info)
-					.setHTML(info.name)
-					.addTo(map);
-		});
+		btn.addEventListener('click', function (event) {
+			restaurants.forEach(function (info) {
+				let marker = new mapboxgl.Marker({
+					color: "rgba(255,0,0,0.93)",
+					draggable: true
+				}).setLngLat(info).addTo(map);
+				let popUp = new mapboxgl.Popup({offset: popupOffsets, className: 'my-class'})
+						.setLngLat(info)
+						.setHTML(info.name)
+						.addTo(map);
+			});
+		})
+
+		btnIn.addEventListener('click', function (event) {
+
+		})
 
 	}());
 </script>
