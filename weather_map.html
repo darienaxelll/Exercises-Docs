@@ -39,65 +39,73 @@
 				font-size: larger;
 			}
 
-			#container {
+			#addressInput {
+				width: 100%;
 				display: flex;
 				flex-direction: row;
-				justify-content: space-around;
+				margin-top: 20px;
 			}
 
-			#forecast-address {
-				display: flex;
-				flex-direction: column;
-				justify-content: space-around;
+			label {
+				padding: 20px;
+			}
+
+			#searchBtn {
+				margin-left: 10px;
+				border-radius: 5px;
+			}
+
+			#current-weather {
+				width: 10%;
+				margin-left: 20px;
 			}
 
 			.card {
-				width: 180%;
-				height: 300px;
+				margin-top: 30px;
 				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 				transition: 0.3s;
 				border: 1px solid black;
 				border-radius: 10px;
-				text-align: center;
-				background-color: #474838;
-				color: white;
-				font-size: large;
 			}
 
 			.card:hover {
 				box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 			}
 
-			.cardBody {
-				margin-top: 30px;
-				padding: 2px 16px;
-			}
-
-			#map {
-				margin-top: 20px;
-				width: 40%;
-				height: 700px;
-				border-radius: 10px;
-				border: solid 1px black;
-			}
-
-			#current-weather {
-				width: 10%;
-				margin-top: 20px;
+			.container {
+				width: 250px;
+				height: 350px;
 			}
 
 			#forecast-body {
+				width: 100%;
 				display: flex;
 				flex-direction: row;
+				justify-content: space-between;
 			}
 
-			.day {
-				width: 20%;
-				height: 60px;
+			.date{
+				height: 75px;
+			}
+
+			.minMax{
+				height: 100px;
+			}
+
+			.description{
+				height: 83px;
+			}
+
+			.wind{
+				height: 83px;
+			}
+
+			#map {
 				margin-top: 30px;
-				background-color: #7B7B7C;
-				border: 1px solid black;
-				border-radius: 5px;
+				width: 100%;
+				height: 350px;
+				border-radius: 10px;
+				border: solid 1px black;
 			}
 		</style>
 	</head>
@@ -111,36 +119,53 @@
 			<a href="#" class="link">Login <i class="fa-solid fa-circle-user"></i></a>
 		</nav>
 	</div>
+	<div id="addressInput">
+		<div>
+			<label for="userInput">Place: </label>
+			<input type="text" id="userInput" placeholder="Enter Address here..."><button id="searchBtn">Find</button>
+		</div>
+		<div id="current-weather"></div>
+	</div>
 
-	<div id="container">
-		<div id="forecast-address">
-			<div id="addressInput">
-				<div class="card">
-					<div class="cardBody">
-						<h4><b>Search location for weather !</b></h4>
-						<input type="text" id="userInput" placeholder="Enter Address here...">
-						<button id="searchBtn">Search</button>
-						<div id="current-weather"></div>
-					</div>
-				</div>
-			</div>
-			<div id="forecastCard">
-				<div class="card">
-					<div class="cardBody">
-						<h4><b>5 Day Forecast</b></h4>
-						<div id="forecast-body">
-							<div class="day" id="day1"></div>
-							<div class="day" id="day2"></div>
-							<div class="day" id="day3"></div>
-							<div class="day" id="day4"></div>
-							<div class="day" id="day5"></div>
+	<div id="forecast-body">
+		<div id="day1">
+						<div class="card">
+							<div class="container">
+								<div id="card1"></div>
+							</div>
 						</div>
 					</div>
+		<div id="day2">
+			<div class="card">
+				<div class="container">
+					<div id="card2"></div>
 				</div>
 			</div>
-		</div>
-		<div id='map'></div>
+					</div>
+		<div id="day3">
+						<div class="card">
+								<div class="container">
+									<div id="card3"></div>
+								</div>
+						</div>
+					</div>
+		<div id="day4">
+			<div class="card">
+				<div class="container">
+					<div id="card4"></div>
+				</div>
+			</div>
+					</div>
+		<div id="day5">
+			<div class="card">
+				<div class="container">
+					<div id="card5"></div>
+				</div>
+			</div>
+					</div>
 	</div>
+
+	<div id='map'></div>
 
 	<!-- Mapbox JS -->
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
@@ -205,19 +230,72 @@
 						units: "imperial"
 					});
 
-					fetch("http://api.openweathermap.org/data/2.5/forecast?" + queryParams, {
+					fetch("https://api.openweathermap.org/data/2.5/onecall?" + queryParams, {
 								method: "GET"
 							}
 					).then(function(response) {
 						return response.json();
 					}).then(function (data) {
-						document.querySelector('#day1').innerHTML = JSON.stringify(data.list[3].main, ['temp']);
-						document.querySelector('#day2').innerHTML = JSON.stringify(data.list[11].main, ['temp']);
-						document.querySelector('#day3').innerHTML = JSON.stringify(data.list[20].main, ['temp']);
-						document.querySelector('#day4').innerHTML = JSON.stringify(data.list[28].main, ['temp']);
-						document.querySelector('#day5').innerHTML = JSON.stringify(data.list[39].main, ['temp']);
+						console.log(data);
+
+						for(let i = 0; i < 5; i++) {
+
+							displayWeatherInCard(i, data.daily[i]);
+						}
+
 					});
 				});
+			}
+
+			function displayWeatherInCard(cardNum, dailyForecast) {
+				console.log(dailyForecast)
+				switch(cardNum) {
+					case 0:
+						let card1 = document.querySelector('#card1')
+						card1.innerHTML = JSON.stringify(dailyForecast.dt);
+						card1.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
+						card1.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
+						card1.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
+						card1.innerHTML += JSON.stringify(dailyForecast.humidity);
+						card1.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						break;
+					case 1:
+						let card2 = document.querySelector('#card2')
+						card2.innerHTML = JSON.stringify(dailyForecast.dt);
+						card2.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
+						card2.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
+						card2.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
+						card2.innerHTML += JSON.stringify(dailyForecast.humidity);
+						card2.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						break;
+					case 2:
+						let card3 = document.querySelector('#card3')
+						card3.innerHTML = JSON.stringify(dailyForecast.dt);
+						card3.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
+						card3.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
+						card3.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
+						card3.innerHTML += JSON.stringify(dailyForecast.humidity);
+						card3.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						break;
+					case 3:
+						let card4 = document.querySelector('#card4')
+						card4.innerHTML = JSON.stringify(dailyForecast.dt);
+						card4.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
+						card4.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
+						card4.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
+						card4.innerHTML += JSON.stringify(dailyForecast.humidity);
+						card4.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						break;
+					case 4:
+						let card5 = document.querySelector('#card5')
+						card5.innerHTML = JSON.stringify(dailyForecast.dt);
+						card5.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
+						card5.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
+						card5.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
+						card5.innerHTML += JSON.stringify(dailyForecast.humidity);
+						card5.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						break;
+				}
 			}
 
 			document.querySelector('#searchBtn').addEventListener('click', getUserInput);
