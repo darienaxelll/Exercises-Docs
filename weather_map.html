@@ -75,10 +75,29 @@
 
 			#map {
 				margin-top: 20px;
-				width: 50%;
+				width: 40%;
 				height: 700px;
 				border-radius: 10px;
 				border: solid 1px black;
+			}
+
+			#current-weather {
+				width: 10%;
+				margin-top: 20px;
+			}
+
+			#forecast-body {
+				display: flex;
+				flex-direction: row;
+			}
+
+			.day {
+				width: 20%;
+				height: 60px;
+				margin-top: 30px;
+				background-color: #7B7B7C;
+				border: 1px solid black;
+				border-radius: 5px;
 			}
 		</style>
 	</head>
@@ -101,9 +120,7 @@
 						<h4><b>Search location for weather !</b></h4>
 						<input type="text" id="userInput" placeholder="Enter Address here...">
 						<button id="searchBtn">Search</button>
-						<div id="current-weather">
-
-						</div>
+						<div id="current-weather"></div>
 					</div>
 				</div>
 			</div>
@@ -112,7 +129,11 @@
 					<div class="cardBody">
 						<h4><b>5 Day Forecast</b></h4>
 						<div id="forecast-body">
-
+							<div class="day" id="day1"></div>
+							<div class="day" id="day2"></div>
+							<div class="day" id="day3"></div>
+							<div class="day" id="day4"></div>
+							<div class="day" id="day5"></div>
 						</div>
 					</div>
 				</div>
@@ -129,6 +150,7 @@
 	<!-- Custom JS -->
 	<script>
 		(async function() {
+			let userInput = document.querySelector('#userInput');
 
 			mapboxgl.accessToken = mapboxAPIKey;
 			let map = new mapboxgl.Map({
@@ -139,16 +161,16 @@
 			});
 
 			async function getUserInput() {
-				let userInput = document.querySelector('#userInput');
-				let currentWeather = document.querySelector('#current-weather');
 
 				geocode(userInput.value, mapboxAPIKey).then(function(result) {
 					map.setCenter(result);
 					map.setZoom(10);
 
+					let marker = new mapboxgl.Marker()
+							.setLngLat(result)
+							.addTo(map);
+
 					let [long, latitude] = result;
-					console.log(long);
-					console.log(latitude);
 
 					let queryParams = new URLSearchParams({
 						APPID: OPEN_WEATHER_APPID,
@@ -161,15 +183,45 @@
 								method: "GET"
 							}
 					).then(function(response) {
-						return response.json()
+						return response.json();
 					}).then(function (data) {
-						console.log(data.main);
+						document.querySelector('#current-weather').innerHTML = JSON.stringify(data.main, ['temp', 'feels_like', 'temp_min', 'temp_max']);
+						// console.log(data);
 					});
 				});
 			}
 
-			document.querySelector('#searchBtn').addEventListener('click', getUserInput)
+			async function forecast() {
+				geocode(userInput.value, mapboxAPIKey).then(function(result) {
+					map.setCenter(result);
+					map.setZoom(10);
 
+					let [long, latitude] = result;
+
+					let queryParams = new URLSearchParams({
+						APPID: OPEN_WEATHER_APPID,
+						lat: latitude,
+						lon: long,
+						units: "imperial"
+					});
+
+					fetch("http://api.openweathermap.org/data/2.5/forecast?" + queryParams, {
+								method: "GET"
+							}
+					).then(function(response) {
+						return response.json();
+					}).then(function (data) {
+						document.querySelector('#day1').innerHTML = JSON.stringify(data.list[3].main, ['temp']);
+						document.querySelector('#day2').innerHTML = JSON.stringify(data.list[11].main, ['temp']);
+						document.querySelector('#day3').innerHTML = JSON.stringify(data.list[20].main, ['temp']);
+						document.querySelector('#day4').innerHTML = JSON.stringify(data.list[28].main, ['temp']);
+						document.querySelector('#day5').innerHTML = JSON.stringify(data.list[39].main, ['temp']);
+					});
+				});
+			}
+
+			document.querySelector('#searchBtn').addEventListener('click', getUserInput);
+			document.querySelector('#searchBtn').addEventListener('click', forecast);
 
 		})();
 	</script>
