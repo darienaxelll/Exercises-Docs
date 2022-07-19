@@ -5,11 +5,19 @@
 		<title>Weather Map App</title>
 		<!-- Mapbox CSS -->
 		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+		<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@100&display=swap" rel="stylesheet">
 		<!-- Custom CSS -->
 		<style>
+			@keyframes cloud {
+				0% {transform: rotate(5deg)}
+				100% {transform: rotate(-10deg)}
+			}
 
 			body{
+				font-family: 'Albert Sans', sans-serif;
 				background-color: #F5F5DC;
+				font-size: large;
+				font-weight: bold;
 			}
 
 			#navbar {
@@ -32,6 +40,11 @@
 			#logo {
 				flex: 3;
 				font-size: xx-large;
+				font-weight: bolder;
+			}
+
+			#cloud {
+				animation: cloud infinite 6s;
 			}
 
 			.link {
@@ -56,8 +69,8 @@
 			}
 
 			#current-weather {
-				width: 10%;
-				margin-left: 20px;
+				width: 50%;
+				margin-left: 40px;
 			}
 
 			.card {
@@ -66,6 +79,7 @@
 				transition: 0.3s;
 				border: 1px solid black;
 				border-radius: 10px;
+				background-color: #83A7A7;
 			}
 
 			.card:hover {
@@ -84,20 +98,17 @@
 				justify-content: space-between;
 			}
 
-			.date{
-				height: 75px;
+			hr {
+				width: 75%;
 			}
 
-			.minMax{
-				height: 100px;
+			.topCard {
+				margin-top: 20px;
+				text-align: center;
 			}
 
-			.description{
-				height: 83px;
-			}
-
-			.wind{
-				height: 83px;
+			.bottomCard {
+				margin-left: 20px;
 			}
 
 			#map {
@@ -112,7 +123,7 @@
 	<body>
 	<div id="top">
 		<nav id="navbar">
-			<a href="#" id="logo">My Weather App <i class="fa-solid fa-cloud"></i></a>
+			<a href="#" id="logo">My Weather App <i id="cloud" class="fa-solid fa-cloud"></i></a>
 			<a href="#" class="link">Cloud Radar</a>
 			<a href="#" class="link">Features</a>
 			<a href="#" class="link">Contact Us <i class="fa-solid fa-phone"></i></a>
@@ -210,7 +221,7 @@
 					).then(function(response) {
 						return response.json();
 					}).then(function (data) {
-						document.querySelector('#current-weather').innerHTML = JSON.stringify(data.main, ['temp', 'feels_like', 'temp_min', 'temp_max']);
+						document.querySelector('#current-weather').innerHTML = `Currently ${JSON.stringify(data.main.temp)}°F, Feels Like: ${JSON.stringify(data.main.feels_like)}`;
 						// console.log(data);
 					});
 				});
@@ -248,52 +259,61 @@
 			}
 
 			function displayWeatherInCard(cardNum, dailyForecast) {
-				console.log(dailyForecast)
+
+				let time = new Date(dailyForecast.dt * 1000);
+				let date = new Date(time);
+
+				let icon = JSON.stringify(dailyForecast.weather, ['icon']);
+				let newIcon = icon.substring(10, 13);
+
+				let description = JSON.stringify(dailyForecast.weather, ['description'])
+				let newDescription = description.substring(16, description.length - 2);
+
 				switch(cardNum) {
 					case 0:
 						let card1 = document.querySelector('#card1')
-						card1.innerHTML = JSON.stringify(dailyForecast.dt);
-						card1.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
-						card1.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
-						card1.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
-						card1.innerHTML += JSON.stringify(dailyForecast.humidity);
-						card1.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						card1.innerHTML =  `<div class="topCard">${JSON.stringify(date)}</div><br>
+											<div class="topCard">Max: ${JSON.stringify(dailyForecast.temp.max)}°F /  Min: ${JSON.stringify(dailyForecast.temp.min)}°F</div><br>
+											<div class="topCard"><img src=" http://openweathermap.org/img/wn/${newIcon}.png"></div><br>
+											<div class="bottomCard">Description: ${newDescription}</div><hr>
+											<div class="bottomCard">Humidity: ${JSON.stringify(dailyForecast.humidity)}</div><hr>
+											<div class="bottomCard">Wind: ${JSON.stringify(dailyForecast.wind_speed)}</div>`;
 						break;
 					case 1:
 						let card2 = document.querySelector('#card2')
-						card2.innerHTML = JSON.stringify(dailyForecast.dt);
-						card2.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
-						card2.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
-						card2.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
-						card2.innerHTML += JSON.stringify(dailyForecast.humidity);
-						card2.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						card2.innerHTML =  `<div class="topCard">${JSON.stringify(date)}</div><br>
+											<div class="topCard">Max: ${JSON.stringify(dailyForecast.temp.max)}°F / Min: ${JSON.stringify(dailyForecast.temp.min)}°F</div><br>
+											<div class="topCard"><img src=" http://openweathermap.org/img/wn/${newIcon}.png"></div><br>
+											<div class="bottomCard">Description: ${newDescription}</div><hr>
+											<div class="bottomCard">Humidity: ${JSON.stringify(dailyForecast.humidity)}</div><hr>
+											<div class="bottomCard">Wind: ${JSON.stringify(dailyForecast.wind_speed)}</div>`;
 						break;
 					case 2:
 						let card3 = document.querySelector('#card3')
-						card3.innerHTML = JSON.stringify(dailyForecast.dt);
-						card3.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
-						card3.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
-						card3.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
-						card3.innerHTML += JSON.stringify(dailyForecast.humidity);
-						card3.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						card3.innerHTML =  `<div class="topCard">${JSON.stringify(date)}</div><br>
+											<div class="topCard">Max: ${JSON.stringify(dailyForecast.temp.max)}°F / Min: ${JSON.stringify(dailyForecast.temp.min)}°F</div><br>
+											<div class="topCard"><img src=" http://openweathermap.org/img/wn/${newIcon}.png"></div><br>
+											<div class="bottomCard">Description: ${newDescription}</div><hr>
+											<div class="bottomCard">Humidity: ${JSON.stringify(dailyForecast.humidity)}</div><hr>
+											<div class="bottomCard">Wind: ${JSON.stringify(dailyForecast.wind_speed)}</div>`;
 						break;
 					case 3:
 						let card4 = document.querySelector('#card4')
-						card4.innerHTML = JSON.stringify(dailyForecast.dt);
-						card4.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
-						card4.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
-						card4.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
-						card4.innerHTML += JSON.stringify(dailyForecast.humidity);
-						card4.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						card4.innerHTML =  `<div class="topCard">${JSON.stringify(date)}</div><br>
+											<div class="topCard">Max:  ${JSON.stringify(dailyForecast.temp.max)}°F / Min: ${JSON.stringify(dailyForecast.temp.min)}°F</div><br>
+											<div class="topCard"><img src=" http://openweathermap.org/img/wn/${newIcon}.png"></div><br>
+											<div class="bottomCard">Description: ${newDescription}</div><hr>
+											<div class="bottomCard">Humidity: ${JSON.stringify(dailyForecast.humidity)}</div><hr>
+											<div class="bottomCard">Wind: ${JSON.stringify(dailyForecast.wind_speed)}</div>`;
 						break;
 					case 4:
 						let card5 = document.querySelector('#card5')
-						card5.innerHTML = JSON.stringify(dailyForecast.dt);
-						card5.innerHTML += JSON.stringify(dailyForecast.temp, ['max', 'min']);
-						card5.innerHTML += JSON.stringify(dailyForecast.weather, ['icon']);
-						card5.innerHTML += JSON.stringify(dailyForecast.weather, ['description']);
-						card5.innerHTML += JSON.stringify(dailyForecast.humidity);
-						card5.innerHTML += JSON.stringify(dailyForecast.wind_speed);
+						card5.innerHTML =  `<div class="topCard">${JSON.stringify(date)}</div><br>
+											<div class="topCard">Max: ${JSON.stringify(dailyForecast.temp.max)}°F / Min: ${JSON.stringify(dailyForecast.temp.min)}°F</div><br>
+											<div class="topCard"><img src=" http://openweathermap.org/img/wn/${newIcon}.png"></div><br>
+											<div class="bottomCard">Description: ${newDescription}</div><hr>
+											<div class="bottomCard">Humidity: ${JSON.stringify(dailyForecast.humidity)}</div><hr>
+											<div class="bottomCard">Wind: ${JSON.stringify(dailyForecast.wind_speed)}</div>`;
 						break;
 				}
 			}
