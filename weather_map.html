@@ -9,13 +9,23 @@
 		<!-- Custom CSS -->
 		<style>
 			@keyframes cloud {
-				0% {transform: rotate(5deg)}
+				0% {transform: rotate(0deg)}
+				50% {transform: rotate(10deg)}
+				75% {transform: rotate(0deg)}
 				100% {transform: rotate(-10deg)}
+			}
+			@keyframes cardBackground {
+				0% {background-color: #83A7A7}
+				30% {background-color: #b0b083}
+				60% {background-color: #83A7A7}
+				90% {background-color: #b0b083}
+				100% {background-color: #83A7A7}
+
 			}
 
 			body{
 				font-family: 'Albert Sans', sans-serif;
-				background-color: #F5F5DC;
+				background-color: #1d061a;
 				font-size: large;
 				font-weight: bold;
 			}
@@ -44,7 +54,7 @@
 			}
 
 			#cloud {
-				animation: cloud infinite 6s;
+				animation: cloud infinite 3s;
 			}
 
 			.link {
@@ -59,7 +69,8 @@
 				margin-top: 20px;
 			}
 
-			label {
+			#place {
+				color: white;
 				padding: 20px;
 			}
 
@@ -79,7 +90,7 @@
 				transition: 0.3s;
 				border: 1px solid black;
 				border-radius: 10px;
-				background-color: #83A7A7;
+				animation: cardBackground infinite 10s;
 			}
 
 			.card:hover {
@@ -120,7 +131,9 @@
 			}
 
 			#menu {
-				background-color: peru;
+				color: black;
+				background-color: #F5F5DC;
+				border-bottom: 1px solid black;
 			}
 		</style>
 	</head>
@@ -136,7 +149,7 @@
 	</div>
 	<div id="addressInput">
 		<div>
-			<label for="userInput">Place: </label>
+			<label id="place"  for="userInput">Place: </label>
 			<input type="text" id="userInput" placeholder="Enter Address here..."><button id="searchBtn">Find</button>
 		</div>
 		<div id="current-weather"></div>
@@ -236,12 +249,17 @@
 					map.setCenter(result);
 					map.setZoom(10);
 
-					let marker = new mapboxgl.Marker()
+					let marker = new mapboxgl.Marker({
+						color: 'red',
+						draggable: true
+					})
 							.setLngLat(result)
-							.addTo(map);
+							.addTo(map)
+
+					const lngLat = marker.getLngLat();
+					console.log(`Longitude: ${lngLat.lng}, Latitude: ${lngLat.lat}`);
 
 					let [long, latitude] = result;
-
 
 					let queryParams = new URLSearchParams({
 						APPID: OPEN_WEATHER_APPID,
