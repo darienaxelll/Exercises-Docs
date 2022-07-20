@@ -11,9 +11,7 @@ function action() {
     githubUser().then (info  => {
         console.log(info)
         console.log(info[0].created_at);
-
-        // let userDetails = JSON.parse(info);
-        // console.log(userDetails[0].created_at);
+        document.querySelector('span').innerHTML = info[0].created_at;
     })
 }
 
