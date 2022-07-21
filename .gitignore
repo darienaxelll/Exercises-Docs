@@ -2,3 +2,10 @@
 .idea
 
 keys.js
+
+private_constants.js
+config.js
+application.properties
+.env
+
+*.iml
