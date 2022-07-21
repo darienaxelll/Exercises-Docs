@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .jalopy-nav {
-    margin-right: 1em;
+    /*margin-right: 1em;*/
 }
