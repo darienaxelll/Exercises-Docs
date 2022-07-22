@@ -29,7 +29,7 @@ export default function Navbar(props) {
                 font-size: x-large;
                 color: darkorange;
                 font-family: 'Roboto Slab', serif;
-                margin-right: 800px;
+                margin-right: 600px;
             }
             
             #logo:hover {
@@ -53,6 +53,11 @@ export default function Navbar(props) {
             #dogFacts:hover {
                 background-color: #E6ECF0;
                 border-radius: 50px;
+            }
+            
+            #quotes:hover {
+                background-color: #E6ECF0;
+                border-radius: 40px;
             }
             
             #about:hover {
@@ -86,6 +91,7 @@ export default function Navbar(props) {
 
     html += `<div><a href="/dogs" data-link id="dogFacts">Dog Facts</a></div>`;
 
+    html += `<div><a href="/quotes" data-link id="quotes">Quotes</a></div>`;
 
     // only logged in can see user info and logout
     if(loggedIn) {

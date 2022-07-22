@@ -17,6 +17,7 @@ export default function DogFactsView(props) {
         border-radius: 10px;
         background-color: #ECEEFF;
         margin: 50px 0;
+        padding: 20px;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
