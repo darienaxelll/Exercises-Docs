@@ -1,8 +1,8 @@
 export function getNotificationElement() {
-  //   return `<div id="notification-box" class="d-none">
-  //   <span></span>
-  // <button type="button" class="float-end btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  //        </div>`;
+    return `<div id="notification-box" class="d-none">
+    <span></span>
+     <button type="button" class="float-end btn-close" data-bs-dismiss="alert" aria-label="Close">Message here.</button>
+         </div>`;
 }
 
 export function showNotification(messageText, messageType) {
