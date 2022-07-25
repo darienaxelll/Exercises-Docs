@@ -34,7 +34,15 @@ export default function router(URI) {
         },
         '/dogs': {
             returnView: DogFactsView,
-            state: {},
+            state:{
+                 dogFacts: {
+                     url: "https://dogfacts.fulgentcorp.com:12250/v1/facts?random=false&limit=10",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': DOG_QUOTE_API_KEY
+                    }
+            }
+        },
             uri: '/dogs',
             title: 'Dog Facts',
             viewEvent: DogFactsEvents
